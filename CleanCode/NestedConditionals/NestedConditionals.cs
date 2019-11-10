@@ -25,25 +25,25 @@ namespace CleanCode.NestedConditionals
             {
                 throw new InvalidOperationException("It's too late to cancel.");
             }
+
+            if (IsGoldCustomer() && LessThan(24))
+            {
+                throw new InvalidOperationException("It's too late to cancel.");
+            }
             else
             {
-                if (Customer.LoyaltyPoints > 100)
+                if (!IsGoldCustomer() && LessThan(48))
                 {
-                    if (LessThan(24))
-                    {
-                        throw new InvalidOperationException("It's too late to cancel.");
-                    }
-                    IsCanceled = true;
+                    throw new InvalidOperationException("It's too late to cancel.");
                 }
-                else
-                {
-                    if (LessThan(48))
-                    {
-                        throw new InvalidOperationException("It's too late to cancel.");
-                    }
-                    IsCanceled = true;
-                }
+                IsCanceled = true;
             }
+            IsCanceled = true;
+
+        }
+        private bool IsGoldCustomer()
+        {
+            return Customer.LoyaltyPoints > 100;
         }
 
         private bool LessThan(int hours)
