@@ -25,11 +25,7 @@ namespace CleanCode.NestedConditionals
             if (Customer.LoyaltyPoints > 100)
             {
                 // If reservation already started throw exception
-                if (DateTime.Now > From)
-                {
-                    throw new InvalidOperationException("It's too late to cancel.");
-                }
-                if ((From - DateTime.Now).TotalHours < 24)
+                if (DateTime.Now > From || LessThan(24))
                 {
                     throw new InvalidOperationException("It's too late to cancel.");
                 }
@@ -40,11 +36,7 @@ namespace CleanCode.NestedConditionals
                 // Regular customers can cancel up to 48 hours before
 
                 // If reservation already started throw exception
-                if (DateTime.Now > From)
-                {
-                    throw new InvalidOperationException("It's too late to cancel.");
-                }
-                if ((From - DateTime.Now).TotalHours < 48)
+                if (DateTime.Now > From || LessThan(48))
                 {
                     throw new InvalidOperationException("It's too late to cancel.");
                 }
@@ -52,5 +44,9 @@ namespace CleanCode.NestedConditionals
             }
         }
 
+        private bool LessThan(int hours)
+        {
+            return (From - DateTime.Now).TotalHours < hours;
+        }
     }
 }
