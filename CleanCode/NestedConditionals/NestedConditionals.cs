@@ -21,26 +21,28 @@ namespace CleanCode.NestedConditionals
 
         public void Cancel()
         {
-            // Gold customers can cancel up to 24 hours before
-            if (Customer.LoyaltyPoints > 100)
+            if (DateTime.Now > From)
             {
-                // If reservation already started throw exception
-                if (DateTime.Now > From || LessThan(24))
-                {
-                    throw new InvalidOperationException("It's too late to cancel.");
-                }
-                IsCanceled = true;
+                throw new InvalidOperationException("It's too late to cancel.");
             }
             else
             {
-                // Regular customers can cancel up to 48 hours before
-
-                // If reservation already started throw exception
-                if (DateTime.Now > From || LessThan(48))
+                if (Customer.LoyaltyPoints > 100)
                 {
-                    throw new InvalidOperationException("It's too late to cancel.");
+                    if (LessThan(24))
+                    {
+                        throw new InvalidOperationException("It's too late to cancel.");
+                    }
+                    IsCanceled = true;
                 }
-                IsCanceled = true;
+                else
+                {
+                    if (LessThan(48))
+                    {
+                        throw new InvalidOperationException("It's too late to cancel.");
+                    }
+                    IsCanceled = true;
+                }
             }
         }
 
