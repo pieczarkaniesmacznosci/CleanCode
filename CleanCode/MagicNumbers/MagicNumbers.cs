@@ -1,15 +1,19 @@
 ﻿
 namespace CleanCode.MagicNumbers
 {
+    // magin number - reader of the code does't know what the number represents
     public class MagicNumbers
     {
+        private const int Draft = 1;
+        private const int Lodged = 2;
+
         public void ApproveDocument(int status)
         {
-            if (status == 1)
+            if (status == Draft)
             {
                 // ...
             }
-            else if (status == 2)
+            else if (status == Lodged)
             {
                 // ...
             }
