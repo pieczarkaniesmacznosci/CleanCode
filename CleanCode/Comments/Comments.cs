@@ -6,6 +6,13 @@ namespace CleanCode.Comments
 {
     public class Comments
     {
+
+        /*
+         - dont write comments, re-write your code
+         - dont explain "whats" obvious
+         - explain "whys" and "hows"
+             * 
+             */
         private int _payFrequency;
         private DbContext _dbContext;
 
