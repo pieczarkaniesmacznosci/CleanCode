@@ -4,24 +4,30 @@ using System.Collections.Generic;
 
 namespace CleanCode.OutputParameters
 {
+    public class GetCustomersResult
+    {
+        public IEnumerable<Customer> Customers { get; set; }
+        public int TotalCount { get; set; }
+    }
+
     public class OutputParameters
     {
         public void DisplayCustomers()
         {
             int totalCount = 0;
-            var tuple = GetCustomers(1);
-            var customers = tuple.Item1;
-            totalCount = tuple.Item2;
+            var obtainedCustoemrs = GetCustomers(pageIndex:1);
+            var customers = obtainedCustoemrs.Customers;
+            totalCount = obtainedCustoemrs.TotalCount;
 
             Console.WriteLine("Total customers: " + totalCount);
             foreach (var c in customers)
                 Console.WriteLine(c);
         }
 
-        public Tuple<IEnumerable<Customer>, int> GetCustomers(int pageIndex)
+        public GetCustomersResult GetCustomers(int pageIndex)
         {
             var totalCount = 100;
-            return Tuple.Create((IEnumerable<Customer>) new List<Customer>(), totalCount);
+            return new GetCustomersResult { Customers= new List<Customer>(), TotalCount = totalCount };
         }
     }
 }
