@@ -1,32 +1,36 @@
 ﻿
 namespace CleanCode.MagicNumbers
 {
+    // use const or enums insted of magic numbers
+    public enum DocumentStatus
+    {
+        Draft = 1,
+        Lodged = 2
+    }
     // magin number - reader of the code does't know what the number represents
     public class MagicNumbers
     {
-        private const int Draft = 1;
-        private const int Lodged = 2;
 
         public void ApproveDocument(int status)
         {
-            if (status == Draft)
+            if (status.Equals(DocumentStatus.Draft))
             {
                 // ...
             }
-            else if (status == Lodged)
+            else if (status.Equals(DocumentStatus.Lodged))
             {
                 // ...
             }
         }
 
-        public void RejectDoument(string status)
+        public void RejectDoument(DocumentStatus status)
         {
             switch (status)
             {
-                case "1":
+                case DocumentStatus.Draft:
                     // ...
                     break;
-                case "2":
+                case DocumentStatus.Lodged:
                     // ...
                     break;
             }
